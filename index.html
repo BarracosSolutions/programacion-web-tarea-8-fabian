@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" /> <title>Tarea 8 Omar Segura</title>
+    <meta charset="UTF-8" /> <title>programacion-web-tarea-8-fabian</title>
     <script src="react.development.js"></script>
     <script src="react-dom.development.js"></script>
     <script src="babel.min.js"></script>
@@ -15,36 +15,46 @@
             super(props);
             this.state = { 
                         employees: [],    
-                        name : "",
-                        years : "",
-                        lastname : "",
-                        address : "",
-                        department : ""
-                        }
+                        nombre : "",
+                        edad : "",
+                        apellido : "",
+                        direccion : "",
+                        departamento : "",
+                        sexo : "",
+                        telefono : "",
+                        cedula : ""
+                        };
             this.change = this.change.bind(this);
             this.saveEmployee = this.saveEmployee.bind(this);
         }
 
-        saveEmployee(){
-            let name = this.state.name;
+        saveEmployee(event){
 
             let employee = {
-                name: name,
-                lastname: this.state.lastname,
-                years: this.state.years,
-                address: this.state.address,
-                department: this.state.department
+                nombre: this.state.nombre,
+                apellido: this.state.apellido,
+                edad: this.state.edad,
+                direccion: this.state.direccion,
+                departamento: this.state.departamento,
+                sexo : this.state.sexo,
+                telefono : this.state.telefono,
+                cedula : this.state.cedula
             }
-            this.setState(prevState => ({ 
-                                            employees: [...prevState.employees, employee],
-                                            name : "",
-                                            years : "",
-                                            lastname : "",
-                                            address : "",
-                                            department : ""
-                                        }));
-            console.log(employee);
-            console.log(this.state.employees);
+            let newState = {};
+            
+            newState["nombre"] = "";
+            newState["edad"] = "";
+            newState["apellido"] = "";
+            newState["direccion"] = "";
+            newState["departamento"] = "";
+            newState["cedula"] = "";
+            newState["sexo"] = "";
+            newState["telefono"] = "";
+            newState["employees"] = [...this.state.employees, employee];
+
+            this.setState(newState);
+            event.preventDefault();
+
         }
 
         change(e){
@@ -59,42 +69,57 @@
             return (
                 <div>
                     <form>
-                        <label> Name:
-                        <input name="name" type="text" value={this.state.name} onChange={this.change}/>
-                        </label>
-                        <label> Last Name:
-                        <input name="lastname" type="text" value={this.state.lastname} onChange={this.change}/>
-                        </label>
-                        <label> Years:
-                        <input name="years" type="number" value={this.state.years} onChange={this.change}/>
-                        </label>
-                        <label> Address:
-                            <input name="address" type="text" value={this.state.address} onChange={this.change}/>
-                        </label>
-                        <label> Department:
-                        <input name="department" type="text" value={this.state.department} onChange={this.change}/>
-                        </label>
+                        <label> Nombre:
+                            <input name="nombre" type="text" value={this.state.nombre} onChange={this.change}/>
+                        </label><br/>
+                        <label> Apellido:
+                            <input name="apellido" type="text" value={this.state.apellido} onChange={this.change}/>
+                        </label><br/>
+                        <label> Edad:
+                            <input name="edad" type="number" value={this.state.edad} onChange={this.change}/>
+                        </label><br/>
+                        <label> Direccion:
+                            <input name="direccion" type="text" value={this.state.direccion} onChange={this.change}/>
+                        </label><br/>
+                        <label> Departamento:
+                            <input name="departamento" type="text" value={this.state.departamento} onChange={this.change}/>
+                        </label><br/>
+                        <label> Cedula:
+                            <input name="cedula" type="text" value={this.state.cedula} onChange={this.change}/>
+                        </label><br/>
+                        <label> Sexo:
+                            <input name="sexo" type="text" value={this.state.sexo} onChange={this.change}/>
+                        </label><br/>
+                        <label> Telefono:
+                            <input name="telefono" type="number" value={this.state.telefono} onChange={this.change}/>
+                        </label><br/>
                         <button onClick={this.saveEmployee}>Save</button>
                     </form>
                     <table>
                         <thead>
                             <tr>
-                                <td>Name</td>
-                                <td>Last Name</td>
-                                <td>Years</td>
-                                <td>Address</td>
-                                <td>Department</td>
+                                <td>Nombre</td>
+                                <td>Apellido</td>
+                                <td>Edad</td>
+                                <td>Direccion</td>
+                                <td>Departamento</td>
+                                <td>Sexo</td>
+                                <td>Telefono</td>
+                                <td>Cedula</td>
                             </tr>
                         </thead>
                         <tbody>
                             {this.state.employees.map(e => 
-                                    {<tr>
-                                        <td>{e.name}</td>
-                                        <td>{e.lastname}</td>
-                                        <td>{e.years}</td>
-                                        <td>{e.address}</td>
-                                        <td>{e.department}</td>
-                                    </tr>})}
+                                    <tr>
+                                        <td>{e.nombre}</td>
+                                        <td>{e.apellido}</td>
+                                        <td>{e.edad}</td>
+                                        <td>{e.direccion}</td>
+                                        <td>{e.departamento}</td>
+                                        <td>{e.sexo}</td>
+                                        <td>{e.telefono}</td>
+                                        <td>{e.cedula}</td>
+                                    </tr>)}
                         </tbody>
                     </table>
                 </div>
