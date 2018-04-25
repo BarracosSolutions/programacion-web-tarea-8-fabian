@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" /> <title>Hello World</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+  </head>
+  <body>
+   <div id="root"></div>
+   <script type="text/babel">
+
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = { name : "",
+                           edad : "",
+                           edad2 : "",
+                           apellido : "",
+                           estado : "",
+                           dir : "",
+                           futbol : "",
+                           futbol2: ""
+
+                        };
+
+            this.updateState = this.updateState.bind(this);
+
+        }
+        updateState(e) {
+        let named = e.target.name;
+        let named2 = e.target.name + "2";
+        let val = e.target.value + "";
+        let val2 ="";
+        let obj = {};
+        let obj2 = {};
+
+        val2 = this.changeValue(named, val);
+
+        obj[named] = val;
+        obj2[named2] = val2;
+
+       this.setState(obj);
+       this.setState(obj2);
+     }
+
+     changeValue(name, val){
+         let newVal = val;
+         if(name == "futbol"){
+            if(val === "Heredia")
+                newVal = "Campeon";
+            else 
+                newVal = "Desclasificado"
+         }else if(name == "edad"){
+            if(val < 12 )
+                newVal = "Nino";
+            else 
+                newVal = "Adulto"
+         }
+
+         return newVal;
+     }
+        render() {
+            return (
+            
+                <form onSubmit={this.handleSubmit}>
+                <label> Name:
+                  <input name="name" type="text" value={this.state.name} onChange={this.updateState} />
+                </label>
+                <label> Apellido:
+                  <input name="apellido" type="text" value={this.state.apellido} onChange={this.updateState} />
+                </label>
+                <label> Estado Civil:
+                    <label> Soltero:
+                        <input name="estado" type="radio" value="Soltero" onChange={this.updateState}  />
+                    </label>
+                    <label> Casado:
+                        <input name="estado" type="radio" value="Casado" onChange={this.updateState}  />
+                    </label>
+                  </label>
+                <label> Edad:
+                  <input name="edad" type="number" value={this.state.edad} onChange={this.updateState} />
+                </label>
+                <label> Dirrecion:
+                  <input name="dir" type="text" value={this.state.dir} onChange={this.updateState} />
+                </label>
+                <label> Equipo de Futbol:
+                    <select name="futbol" value={this.state.futbol} onChange={this.updateState}>
+                        <option value="Heredia">Heredia</option>
+                        <option value="Alajuela">Alajuela</option>
+                        <option value="Saprissa">Saprissa</option>
+                        <option value="Cartago">Cartago</option>
+                    </select>
+                </label>
+                <br/><br/><br/>
+                <h4>Nombre Completo: {this.state.name} {this.state.apellido}</h4>
+                <h4>Edad: {this.state.edad2}</h4>
+                <h4>Apellido: {this.state.apellido}</h4>
+                <h4>Equipo: { this.state.futbol2 }</h4>
+                <h4>Dirrecion: {this.state.dir}</h4>
+                <h4>Estado Civil: {this.state.estado}</h4>
+
+                </form>
+            );
+        }
+    }
+   ReactDOM.render(<App/>, document.getElementById('root'));
+   </script>
+  </body>
+</html>
